@@ -1,0 +1,46 @@
+[
+    {
+        "slug":"kfc",
+        "title":"kfc",
+        "chickenPieceRating":5,
+        "chickenWingRating":5,
+        "fryRating":3,
+        "sauceRating":6,
+        "drinksRating":5,
+        "overallRating":5,
+        "comments":"average chicken; wing coating too thick and cornflakey, very poor, undersalted fries; okay sauces but strictly rationed (an extra point has been given for the availability of gravy) drinks average as would be expected from an international chain."
+    },
+    {
+        "slug":"chicken-cottage",
+        "title":"chicken cottage",
+        "chickenPieceRating":5,
+        "chickenWingRating":6,
+        "fryRating":6,
+        "sauceRating":4,
+        "drinksRating":5,
+        "overallRating":6,
+        "comments":"chicken skin on pieces often soggy, but wings have a good crispness and spice to them. less thick than the wing coating from kfc. fries average. poor sauces, ketchup very pink, sweet, and vinegary, often only available from squeezy bottles and not sachets. fountain drinks available which i am a big fan of."
+    },
+    {
+        "slug":"chicken-chicken",
+        "title":"chicken chicken (aka chick chicken)",
+        "chickenPieceRating":6,
+        "chickenWingRating":7,
+        "fryRating":6,
+        "sauceRating":null,
+        "drinksRating":0,
+        "overallRating":7,
+        "comments":"excellent wings, with good coating and spice. good chicken pieces with thin coating. no experience of sauces as have only eaten via delivery, not in-store. this may also affect experience of fries as they have on occassion been soggy. drinks are standard selection of cans."
+    },
+    {
+        "slug": "morleys-bermondsey",
+        "title": "morleys (bermondsey)",
+        "chickenPieceRating": 6,
+        "chickenWingRating": 8,
+        "fryRating": 8,
+        "sauceRating": null,
+        "drinksRating": 7,
+        "overallRating": 8,
+        "comments":"very good wings, nicely coated and spiced. all flats, no drumettes for some reason, but I prefer flats. chicken pieces nice but slightly hard batter, which would kind of crumble off. Good crispy fries. Wide drink selection, including Mirinda, no fountain drinks. No chance to try sauces."
+    }
+]

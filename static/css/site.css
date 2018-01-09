@@ -1,0 +1,138 @@
+
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200,700");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Code Pro', monospace;
+}
+
+.header {
+    background-position: center;
+    padding: 40px 20px;
+    min-height: 240px;
+}
+
+.header .page-title {
+    font-weight: 200;
+    font-size: 80px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000;
+}
+
+.header .subtitle {
+    font-weight: 200;
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000;
+}
+
+.nav {
+    background: #000;
+    text-align: center;
+}
+
+.nav li {
+    display: inline-block;
+}
+
+.nav a {
+    display: inline-block;
+    padding: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav a:hover {
+    background-color: #3ab795;
+    text-decoration: underline;
+}
+
+.main-content {
+    margin: 50px auto;
+    max-width: 600px;
+}
+
+.main-content p {
+    line-height: 1.6;
+    margin-bottom: 1.7em;
+}
+
+.footer {
+    margin: 50px auto;
+    max-width: 600px;
+    border-top: 1px solid #444;
+    padding: 20px 0;
+}
+
+.footer p {
+    color: #444;
+    font-size: 12px;
+}
+
+.rating-list {
+    list-style: none;
+}
+
+.rating__label {
+    width: 35%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rating__value {
+    background-image: url('../images/star-unfilled.svg');
+    width: 300px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rating__value::before {
+    display: block;
+    content: '';
+    width: 0px;
+    height: 30px;
+    background-image: url('../images/star-filled.svg');
+}
+
+.rating__value--1::before {
+    width: 30px;
+}
+.rating__value--2::before {
+    width: 60px;
+}
+.rating__value--3::before {
+    width: 90px;
+}
+.rating__value--4::before {
+    width: 120px;
+}
+.rating__value--5::before {
+    width: 150px;
+}
+.rating__value--6::before {
+    width: 180px;
+}
+.rating__value--7::before {
+    width: 210px;
+}
+.rating__value--8::before {
+    width: 240px;
+}
+.rating__value--9::before {
+    width: 270px;
+}
+.rating__value--10::before {
+    width: 300px;
+}
+
+.rating__number {
+    display: none;
+}

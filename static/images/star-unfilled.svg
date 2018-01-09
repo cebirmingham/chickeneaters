@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 30 30" width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <path d="M 299 208.733 L 301.967 217.707 L 311 217.9 L 303.8 223.64 L 306.417 232.733 L 299 227.307 L 291.583 232.733 L 294.2 223.64 L 287 217.9 L 296.033 217.707 Z" style="fill: rgb(216, 216, 216);" transform="matrix(-0.809017, 0.587785, -0.587785, -0.809017, 387.40148, 19.590659)" bx:shape="star 299 222 12.618 13.267 0.4 5 1@6dbe4223"/>
+</svg>
