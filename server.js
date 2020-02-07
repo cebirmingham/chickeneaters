@@ -32,23 +32,12 @@ app.get('/', (req, res) => {
     res.render('home', {
         title: "chickeneaters.",
         subtitle: "A guide for eaters of chicken.",
-        mainImage: "/images/chicken1.jpg"
+        mainImage: "/images/chicken1.jpg",
+        reviews:tempData,
     });
 });
-app.get('/about', (req, res) => {
-    res.render('about', {
-        title: "about chickeneaters.",
-        mainImage:"/images/chicken2.jpg"
-    });
-});
-app.get('/reviews', (req, res) => {
-    res.render('reviews', {
-        title: "the chicken.",
-        mainImage:"/images/reviews1.jpg",
-        reviews:tempData
-    });
-});
-app.get('/reviews/:slug', (req, res, next) => {
+
+app.get('/:slug', (req, res, next) => {
     const reviews = tempData.filter((review) => {
        return req.params.slug === review.slug;
     });
@@ -64,6 +53,14 @@ app.get('/reviews/:slug', (req, res, next) => {
         next();
     }
 });
+
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: "about chickeneaters.",
+        mainImage:"/images/chicken2.jpg"
+    });
+});
+
 app.get('/admin/addReview', (req, res) => {
     res.render('admin/addReview');
 });
