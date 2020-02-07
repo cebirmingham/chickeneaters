@@ -64,6 +64,9 @@ app.get('/reviews/:slug', (req, res, next) => {
         next();
     }
 });
+app.get('/admin/addReview', (req, res) => {
+    res.render('admin/addReview');
+});
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('Listening on http://localhost:' + (process.env.PORT || 3000));
