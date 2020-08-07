@@ -9,8 +9,10 @@ const express = require('express');
 const logger = require('morgan');
 const dotenv = require('dotenv');
 const knex = require('knex');
-const tempData = require("./temp-data/reviews.json")
+const axios = require('axios');
+const tempData = require("./temp-data/reviews.json");
 const expressHandlebars = require('express-handlebars');
+const { sendToNeo } = require('./api/sendToNeo');
 
 dotenv.config();
 const app = express();
@@ -61,9 +63,40 @@ app.get('/about', (req, res) => {
     });
 });
 
-app.get('/admin/addReview', (req, res) => {
-    res.render('admin/addReview');
+app.get('/admin/addReview', async (req, res) => {
+    const host = process.env.NODE_ENV === 'production' ? 'https://chickeneaters.co.uk' : 'http://localhost:3000';
+    const result = await axios.get(`${host}/api/sendToNeo`, { 
+        params: req.query
+    })
+    .catch(error => {
+        console.log('I AM THE ERROR' , error);
+    });
+    // console.log('result' , result);
+    // TODO: Fetch api/sendToNeo
+    // if (req.query.title.length > 0 && req.query.overallRating.length > 0) {
+    //     //save data to database
+    // }
+    res.render('admin/addReview', {
+        review: {
+            chickenPieceRating: 0,
+            chickenWingRating: 0,
+            fryRating: 0,
+            sauceRating: 0,
+            drinkRating: 0,
+            overallRating: 0
+        }
+    });
 });
+
+app.get('/api/sendToNeo' , async (req, res) => {
+    console.log('****************' , req.query);
+    
+    const result = await sendToNeo(req.query)
+    .catch(console.error);
+    res.json({
+        success: true
+    })
+})
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('Listening on http://localhost:' + (process.env.PORT || 3000));

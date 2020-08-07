@@ -86,53 +86,63 @@ body {
     vertical-align: middle;
 }
 
-.rating__value {
-    background-image: url('../images/star-unfilled.svg');
-    width: 300px;
-    height: 30px;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.rating__value::before {
-    display: block;
-    content: '';
-    width: 0px;
-    height: 30px;
-    background-image: url('../images/star-filled.svg');
-}
-
-.rating__value--1::before {
-    width: 30px;
-}
-.rating__value--2::before {
-    width: 60px;
-}
-.rating__value--3::before {
-    width: 90px;
-}
-.rating__value--4::before {
-    width: 120px;
-}
-.rating__value--5::before {
-    width: 150px;
-}
-.rating__value--6::before {
-    width: 180px;
-}
-.rating__value--7::before {
-    width: 210px;
-}
-.rating__value--8::before {
-    width: 240px;
-}
-.rating__value--9::before {
-    width: 270px;
-}
-.rating__value--10::before {
-    width: 300px;
-}
-
 .rating__number {
     display: none;
 }
+
+input[type=range] {
+    -webkit-appearance: none;
+    /* width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s; */
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background-image: url('/images/Chooks/nubbet-1.png'); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+
+.nugget-0 input[type=range]::-webkit-slider-thumb {
+
+}
+.nugget-1 input[type=range]::-webkit-slider-thumb {
+    background-image: url('/images/Chooks/nubbet-1.png');
+}
+.nugget-2 input[type=range]::-webkit-slider-thumb {
+    background-image: url('/images/Chooks/nugget-2.png');
+}
+.nugget-3 input[type=range]::-webkit-slider-thumb {
+    background-image: url('/images/Chooks/nugget-3.png');
+}
+.nugget-4 input[type=range]::-webkit-slider-thumb {
+    background-image: url('/images/Chooks/nugget-4.png');
+}
+.nugget-5 input[type=range]::-webkit-slider-thumb {
+    background-image: url('/images/Chooks/nugget-5.png');
+}
+.nugget-6 input[type=range]::-webkit-slider-thumb {
+    background-image: url('/images/Chooks/nugget-6.png');
+}
+.nugget-7 input[type=range]::-webkit-slider-thumb {
+    background-image: url('/images/Chooks/nugget-7.png');
+}
+.nugget-8 input[type=range]::-webkit-slider-thumb {
+    background-image: url('/images/Chooks/nugget-8.png');
+}
+.nugget-9 input[type=range]::-webkit-slider-thumb {
+    background-image: url('/images/Chooks/nugget-9.png');
+}
+.nugget-10 input[type=range]::-webkit-slider-thumb {
+    background-image: url('/images/Chooks/nugget-10.png');
+}
+
