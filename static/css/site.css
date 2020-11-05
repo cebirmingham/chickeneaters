@@ -112,37 +112,40 @@ input[type=range]::-webkit-slider-thumb {
     cursor: pointer;
   }
 
-.nugget-0 input[type=range]::-webkit-slider-thumb {
+  // why don't these work together ?? find out next time
 
+.nugget-0 input[type=range]::-webkit-slider-thumb,
+.nugget-0 input[type=range]::-moz-range-thumb {    
+    border: 1px solid red;
 }
-.nugget-1 input[type=range]::-webkit-slider-thumb {
+.nugget-1 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nubbet-1.png');
 }
-.nugget-2 input[type=range]::-webkit-slider-thumb {
+.nugget-2 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nugget-2.png');
 }
-.nugget-3 input[type=range]::-webkit-slider-thumb {
+.nugget-3 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nugget-3.png');
 }
-.nugget-4 input[type=range]::-webkit-slider-thumb {
+.nugget-4 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nugget-4.png');
 }
-.nugget-5 input[type=range]::-webkit-slider-thumb {
+.nugget-5 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nugget-5.png');
 }
-.nugget-6 input[type=range]::-webkit-slider-thumb {
+.nugget-6 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nugget-6.png');
 }
-.nugget-7 input[type=range]::-webkit-slider-thumb {
+.nugget-7 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nugget-7.png');
 }
-.nugget-8 input[type=range]::-webkit-slider-thumb {
+.nugget-8 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nugget-8.png');
 }
-.nugget-9 input[type=range]::-webkit-slider-thumb {
+.nugget-9 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nugget-9.png');
 }
-.nugget-10 input[type=range]::-webkit-slider-thumb {
+.nugget-10 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nugget-10.png');
 }
 
