@@ -17,6 +17,10 @@ const { sendToNeo } = require('./api/sendToNeo');
 const { fetchFromNeo } = require('./api/fetchFromNeo');
 
 dotenv.config();
+
+// Temporary code to secure live website
+const lockEverythingDown = Boolean(process.env.LOCK_EVERYTHING_DOWN);
+
 const app = express();
 const database = knex({
     client: 'pg',
@@ -70,34 +74,38 @@ app.get('/about', (req, res) => {
     });
 });
 
-app.get('/admin/addReview', async (req, res) => {
-    const host = process.env.NODE_ENV === 'production' ? 'https://chickeneaters.co.uk' : 'http://localhost:3000';
-    res.render('admin/addReview', {
-        review: {
-            chickenPieceRating: 0,
-            chickenWingRating: 0,
-            fryRating: 0,
-            sauceRating: 0,
-            drinkRating: 0,
-            overallRating: 0
-        }
+if (!lockEverythingDown) {
+
+    app.get('/admin/addReview', async (req, res) => {
+        const host = process.env.NODE_ENV === 'production' ? 'https://chickeneaters.co.uk' : 'http://localhost:3000';
+        res.render('admin/addReview', {
+            review: {
+                chickenPieceRating: 0,
+                chickenWingRating: 0,
+                fryRating: 0,
+                sauceRating: 0,
+                drinkRating: 0,
+                overallRating: 0
+            }
+        });
     });
-});
 
-app.post('/api/sendToNeo' , async (req, res) => {
+    app.post('/api/sendToNeo' , async (req, res) => {
 
-    await sendToNeo(req.body)
-        .catch(console.error);
-})
-
-app.get('/api/fetchFromNeo' , async (req, res) => {
-
-    const data = await fetchFromNeo()
-        .catch(console.error);
-    res.json({
-        data
+        await sendToNeo(req.body)
+            .catch(console.error);
     })
-})
+
+    app.get('/api/fetchFromNeo' , async (req, res) => {
+
+        const data = await fetchFromNeo()
+            .catch(console.error);
+        res.json({
+            data
+        })
+    })
+
+}
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('Listening on http://localhost:' + (process.env.PORT || 3000));
