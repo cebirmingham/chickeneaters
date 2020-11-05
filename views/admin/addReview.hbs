@@ -1,60 +1,50 @@
-<form>
+<form id="form">
   <p>
-  title:
-  <input type="text" name="title"/>
+    title:
+    <input type="text" name="title" />
   </p>
-<input type="hidden" name="chickenPieceRating"/>
-<input type="hidden" name="chickenWingRating"/>
-<input type="hidden" name="fryRating"/>
-<input type="hidden" name="sauceRating"/>
-<input type="hidden" name="drinksRating"/>
-<input type="hidden" name="overallRating"/>
-<p>comments: <textarea name="comments"> </textarea> </p>
+  <p>comments: <textarea name="comments"> </textarea> </p>
   <ul class="rating-list">
     <li class="rating">
       <span class="rating__label">chicken piece rating:</span>
-      <button class="rating__value">1</button>
-      <button class="rating__value">2</button> 
-      <button>3</button> 
-      <button>4</button> 
-      <button>5</button> 
-      <button>6</button> 
-      <button>7</button> 
-      <button>8</button> 
-      <button>9</button> 
-      <button>10</button> 
-      <span class="rating__value rating__value--{{review.chickenPieceRating}}">
-        <span class="rating__number">{{review.chickenPieceRating}}</span>
+      <span class="nugget-0 rating__value rating__value--{{review.chickenPieceRating}}">
+        <input type="range" class="chickenRange" name="chickenPieceRating" min="0" max="10" value="0">
+        <label for="value" class="chickenRangeLabel">0</label>
       </span>
     </li>
     <li class="rating">
       <span class="rating__label">chicken wing rating:</span>
-      <span class="rating__value rating__value--{{review.chickenWingRating}}">
-        <span class="rating__number">{{review.chickenWingRating}}</span>
+      <span class="nugget-0 rating__value rating__value--{{review.chickenWingRating}}">
+        <input type="range" class="chickenRange" name="chickenWingRating" min="0" max="10" value="0">
+        <label for="value" class="chickenRangeLabel">0</label>
       </span>
     </li>
     <li class="rating">
       <span class="rating__label">fry rating:</span>
-      <span class="rating__value rating__value--{{review.fryRating}}">
-        <span class="rating__number">{{review.fryRating}}</span>
+      <span class="nugget-0 rating__value rating__value--{{review.fryRating}}">
+        <input type="range" class="chickenRange" name="fryRating" min="0" max="10" value="0">
+        <label for="value" class="chickenRangeLabel">0</label>
       </span>
     </li>
     <li class="rating">
       <span class="rating__label">sauce rating:</span>
-      <span class="rating__value rating__value--{{review.sauceRating}}">
-        <span class="rating__number">{{review.sauceRating}}</span>
+      <span class="nugget-0 rating__value rating__value--{{review.sauceRating}}">
+        <input type="range" class="chickenRange" name="sauceRating" min="0" max="10" value="0">
+        <label for="value" class="chickenRangeLabel">0</label>
       </span>
     </li>
     <li class="rating">
       <span class="rating__label">drink rating:</span>
-      <span class="rating__value rating__value--{{review.drinksRating}}">
-        <span class="rating__number">{{review.drinksRating}}</span>
+      <span class="nugget-0 rating__value rating__value--{{review.drinkRating}}">
+        <input type="range" class="chickenRange" name="drinkRating" min="0" max="10" value="0">
+        <label for="value" class="chickenRangeLabel">0</label>
       </span>
     </li>
     <li class="rating">
       <span class="rating__label">overall rating:</span>
-      <span class="rating__value rating__value--{{review.overallRating}}">
-        <span class="rating__number">{{review.overallRating}}</span>
+      <span class="nugget-0 rating__value rating__value--{{review.overallRating}}">
+        <input type="range" class="chickenRange" name="overallRating" min="0" max="10" value="0">
+        <label for="value" class="chickenRangeLabel">0</label>
       </span>
     </li>
   </ul>
@@ -62,3 +52,5 @@
     submit review
   </button>
 </form>
+
+<script src="/js/addReview.js"></script>
