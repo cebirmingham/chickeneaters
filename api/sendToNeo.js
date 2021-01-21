@@ -1,5 +1,7 @@
 const neo4j = require('neo4j-driver')
+const { uuid } = require('uuidv4');
 
+//TODO escape strings to allow apostrophes
 
 async function sendToNeo(query) {
 	const { GRAPHENEDB_BOLT_USER, GRAPHENEDB_BOLT_PASSWORD, GRAPHENEDB_BOLT_URL} = process.env;
@@ -23,6 +25,9 @@ async function sendToNeo(query) {
 		overallRating,
 	 } = data
 
+	  const slug = title.replace(/\s+/g, '-').toLowerCase();
+	  const id = uuid();
+
 	const reviewData = `{
 		title: '${title}',
 		comment: '${comments}',
@@ -31,7 +36,9 @@ async function sendToNeo(query) {
 		fryRating: '${fryRating}',
 		sauceRating: '${sauceRating}',
 		drinkRating: '${drinkRating}',
-		overallRating: '${overallRating}'
+		overallRating: '${overallRating}',
+		slug: '${slug}',
+		id: '${id}'
 	}`
 
 	const queryString = `CREATE (n:Review ${reviewData}) WITH n

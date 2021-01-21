@@ -1,11 +1,11 @@
 const neo4j = require('neo4j-driver')
 
-async function fetchFromNeo() {
+async function fetchOneFromNeo(reviewId) {
   
   const { GRAPHENEDB_BOLT_USER, GRAPHENEDB_BOLT_PASSWORD, GRAPHENEDB_BOLT_URL} = process.env;
   const driver = neo4j.driver(GRAPHENEDB_BOLT_URL, neo4j.auth.basic(GRAPHENEDB_BOLT_USER, GRAPHENEDB_BOLT_PASSWORD),{ encrypted : true})
   
-  const queryString = 'MATCH (n:Review) RETURN n';
+  const queryString = `MATCH (n:Review) WHERE n.id = '${reviewId}' RETURN n`;
   const session = driver.session()
   
 
@@ -18,15 +18,10 @@ async function fetchFromNeo() {
 	// on application exit:
   await driver.close()
 
-  const reviews = result.records.map(record => {
-    return record._fields[0].properties
-  });
-  console.log({reviews});
-  
-  return reviews;
+  return result.records[0]._fields[0].properties;
 }
 
 module.exports = {
-  fetchFromNeo
+  fetchOneFromNeo
 };
 

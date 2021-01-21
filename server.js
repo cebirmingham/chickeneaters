@@ -1,8 +1,6 @@
 /* Todo
     - icons for delivery and drunk reviews
     - handle null values (i.e. if no sauces/drinks ordered. can comment on available selection
-    - put up on heroku
-    - actual reviews in db
 )*/
 
 const express = require('express');
@@ -13,13 +11,15 @@ const axios = require('axios');
 const bodyParser = require('body-parser')
 const tempData = require("./temp-data/reviews.json");
 const expressHandlebars = require('express-handlebars');
+dotenv.config();
 const { sendToNeo } = require('./api/sendToNeo');
 const { fetchFromNeo } = require('./api/fetchFromNeo');
+const { fetchOneFromNeo } = require('./api/fetchOneFromNeo');
 
-dotenv.config();
 
-// Temporary code to secure live website
-const lockEverythingDown = Boolean(process.env.LOCK_EVERYTHING_DOWN);
+
+// Temporary code to secure live code
+const lockEverythingDown = Boolean(process.env.LOCK_EVERYTHING_DOWN === 'true');
 
 const app = express();
 const database = knex({
@@ -50,12 +50,12 @@ app.get('/', async (req, res) => {
     });
 });
 
-app.get('/:slug', (req, res, next) => {
-    const reviews = tempData.filter((review) => {
-       return req.params.slug === review.slug;
-    });
-    const review = reviews[0];
+app.get('/:slug/:id', async (req, res, next) => {
+    console.log('req.params.id ' , req.params.id);
+    const review = await fetchOneFromNeo(req.params.id);
+
     if (review) {
+        console.log('review.comment' , review.comment)
         res.render("review", {
             title: review.title,
             review: review,
@@ -74,7 +74,7 @@ app.get('/about', (req, res) => {
     });
 });
 
-if (!lockEverythingDown) {
+if (lockEverythingDown !== true) {
 
     app.get('/admin/addReview', async (req, res) => {
         const host = process.env.NODE_ENV === 'production' ? 'https://chickeneaters.co.uk' : 'http://localhost:3000';
@@ -110,3 +110,6 @@ if (!lockEverythingDown) {
 app.listen(process.env.PORT || 3000, () => {
     console.log('Listening on http://localhost:' + (process.env.PORT || 3000));
 });
+
+
+// cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
