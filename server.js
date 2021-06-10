@@ -6,9 +6,7 @@
 const express = require('express');
 const logger = require('morgan');
 const dotenv = require('dotenv');
-const knex = require('knex');
 const bodyParser = require('body-parser')
-const tempData = require("./temp-data/reviews.json");
 const expressHandlebars = require('express-handlebars');
 dotenv.config();
 const { sendToHasura } = require('./api/sendToHasura');
@@ -22,10 +20,6 @@ const { fetchReviewFromHasura } = require('./api/fetchReviewFromHasura');
 const lockEverythingDown = Boolean(process.env.LOCK_EVERYTHING_DOWN === 'true');
 
 const app = express();
-const database = knex({
-    client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost:5432/chickeneaters'
-})
 
 app.use(bodyParser.json());
 
