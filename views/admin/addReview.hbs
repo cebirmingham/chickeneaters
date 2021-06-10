@@ -1,9 +1,5 @@
 <form id="form">
-  <p>
-    title:
-    <input type="text" name="title" />
-  </p>
-  <p>comments: <textarea name="comments"> </textarea> </p>
+  chicken shop name: <input id="autocomplete"/>
   <ul class="rating-list">
     <li class="rating">
       <span class="rating__label">chicken piece rating:</span>
@@ -48,9 +44,49 @@
       </span>
     </li>
   </ul>
+  <p>comments: <textarea name="comments"> </textarea> </p>
   <button type="submit">
     submit review
   </button>
 </form>
 
 <script src="/js/addReview.js"></script>
+<script src="/js/autocomplete.js"></script>
+<script>
+  var countries = [
+  { label: 'United Kingdom', value: 'UK' },
+  { label: 'United States', value: 'US' }
+];
+
+var input = document.getElementById("autocomplete");
+
+const getChickenData = async () => {
+  const response = await fetch("http://localhost:3000/api/fetchAllFromHasura");
+  const { data } = await response.json();
+  console.log('data1' , data)
+  	const suggestions = data.map(element => {
+		const { name: label, id: value } = element
+		return {label, value}
+	});
+    console.log('suggestions' , suggestions)
+
+
+  return suggestions;
+}
+
+
+autocomplete({
+  input: input,
+  fetch: async function(text, update) {
+      text = text.toLowerCase();
+      // you can also use AJAX requests instead of preloaded data
+      const chickenData = await getChickenData();
+      console.log('i am he chicken data ' , chickenData)
+      //var suggestions = fetch("http://localhost:3000/api/fetchAllFromHasura").then(res => res.json()).data.filter(n => n.label.toLowerCase().startsWith(text))
+      update(chickenData);
+  },
+  onSelect: function(item) {
+      input.value = item.label;
+  }
+});
+</script>

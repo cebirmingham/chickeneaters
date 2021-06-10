@@ -7,14 +7,14 @@ const express = require('express');
 const logger = require('morgan');
 const dotenv = require('dotenv');
 const knex = require('knex');
-const axios = require('axios');
 const bodyParser = require('body-parser')
 const tempData = require("./temp-data/reviews.json");
 const expressHandlebars = require('express-handlebars');
 dotenv.config();
-const { sendToNeo } = require('./api/sendToNeo');
-const { fetchFromNeo } = require('./api/fetchFromNeo');
-const { fetchOneFromNeo } = require('./api/fetchOneFromNeo');
+const { sendToHasura } = require('./api/sendToHasura');
+const { fetchAllFromHasura } = require('./api/fetchAllFromHasura');
+const { fetchReviewsFromHasura } = require('./api/fetchReviewsFromHasura');
+const { fetchReviewFromHasura } = require('./api/fetchReviewFromHasura');
 
 
 
@@ -39,7 +39,7 @@ app.use(logger('dev'));
 app.use(express.static(__dirname + '/static'));
 
 app.get('/', async (req, res) => {
-    const data = await fetchFromNeo()
+    const data = await fetchReviewsFromHasura()
     .catch(console.error);
 
     res.render('home', {
@@ -50,15 +50,13 @@ app.get('/', async (req, res) => {
     });
 });
 
-app.get('/:slug/:id', async (req, res, next) => {
-    console.log('req.params.id ' , req.params.id);
-    const review = await fetchOneFromNeo(req.params.id);
+app.get('/review/:id', async (req, res, next) => {
+    const review = await fetchReviewFromHasura(req.params.id);
 
     if (review) {
-        console.log('review.comment' , review.comment)
         res.render("review", {
-            title: review.title,
-            review: review,
+            title: review[0].title,
+            review: review[0],
             mainImage:"/images/reviews1.jpg"
         });
     }
@@ -78,6 +76,7 @@ if (lockEverythingDown !== true) {
 
     app.get('/admin/addReview', async (req, res) => {
         const host = process.env.NODE_ENV === 'production' ? 'https://chickeneaters.co.uk' : 'http://localhost:3000';
+        const chickenShopList = await fetchAllFromHasura(req.body).catch(console.error);
         res.render('admin/addReview', {
             review: {
                 chickenPieceRating: 0,
@@ -86,30 +85,28 @@ if (lockEverythingDown !== true) {
                 sauceRating: 0,
                 drinkRating: 0,
                 overallRating: 0
-            }
+            },
+            chickenShopList,
         });
     });
 
-    app.post('/api/sendToNeo' , async (req, res) => {
-
-        await sendToNeo(req.body)
-            .catch(console.error);
-    })
-
-    app.get('/api/fetchFromNeo' , async (req, res) => {
-
-        const data = await fetchFromNeo()
+    app.post('/api/sendToHasura' , async (req, res) => {
+        const data = await sendToHasura(req.body)
             .catch(console.error);
         res.json({
-            data
+             data
         })
     })
 
+    app.get('/api/fetchAllFromHasura' , async (req, res) => {
+        const data = await fetchAllFromHasura(req.body)
+        .catch(console.error);
+    res.json({
+         data
+        })
+    })
 }
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('Listening on http://localhost:' + (process.env.PORT || 3000));
 });
-
-
-// cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
