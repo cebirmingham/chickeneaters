@@ -20,7 +20,7 @@ async function fetchGraphQL(operationsDoc, operationName, variables) {
 
   return await result.json();
 }
-//WE will need to generate this from form page in future 
+//WE will need to generate this from form page in future DO THIS NEXT TIME
 const operationsDoc = `
   mutation MyMutation {
     insert_review(objects: {chicken_piece_rating: 10, chicken_shop_id: "2a20e55d-f0cf-4a9a-b9ea-857dc31a42f5", chicken_wing_rating: 10, comment: "best chicken ever no 2", drink_rating: 10, fry_rating: 10, overall_rating: 10, sauce_rating: 10}) {
@@ -40,7 +40,7 @@ function executeMyMutation() {
   );
 }
 
-async function fetchAllFromHasura() {
+async function sendToHasura() {
   const { errors, data } = await executeMyMutation();
 
   if (errors) {
@@ -52,5 +52,5 @@ async function fetchAllFromHasura() {
   console.log(data);
 }
 
-module.exports = { fetchAllFromHasura }
+module.exports = { sendToHasura }
 
