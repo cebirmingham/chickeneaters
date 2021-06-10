@@ -5,9 +5,10 @@
   "author": "Charlotte Birmingham",
   "scripts": {
     "start": "node server.js",
-    "start-dev": "nodemon server.js -e css,hbs,js,json"
+    "start-dev": "nodemon -e css,hbs,js,json server.js"
   },
   "dependencies": {
+    "autocompleter": "^6.1.0",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
@@ -16,9 +17,11 @@
     "knex": "^0.20.8",
     "morgan": "^1.9.1",
     "neo4j-driver": "4.0.2",
-    "pg": "^7.18.1"
+    "pg": "^7.18.2",
+    "uuidv4": "^6.2.6"
   },
   "devDependencies": {
+    "node-fetch": "^2.6.1",
     "nodemon": "^1.14.1"
   }
 }

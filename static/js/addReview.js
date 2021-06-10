@@ -27,7 +27,7 @@ function onSubmit(event) {
 		return {name, value}
 	});
 
-	fetch('http://localhost:3000/api/sendToNeo', {
+	fetch('http://localhost:3000/api/sendToHasura', {
 		method: 'POST', 
 		headers: {
 			'Content-Type': 'application/json',

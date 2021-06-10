@@ -80,7 +80,7 @@ body {
     list-style: none;
 }
 
-.rating__label {
+/* .rating__label {
     width: 35%;
     display: inline-block;
     vertical-align: middle;
@@ -88,7 +88,8 @@ body {
 
 .rating__number {
     display: none;
-}
+    /* border: 1px solid seagreen */
+} */
 
 input[type=range] {
     -webkit-appearance: none;
@@ -112,12 +113,12 @@ input[type=range]::-webkit-slider-thumb {
     cursor: pointer;
   }
 
-  // why don't these work together ?? find out next time
+  /* // why don't these work together ?? find out next time */
 
-.nugget-0 input[type=range]::-webkit-slider-thumb,
+/* .nugget-0 input[type=range]::-webkit-slider-thumb,
 .nugget-0 input[type=range]::-moz-range-thumb {    
     border: 1px solid red;
-}
+} */
 .nugget-1 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nubbet-1.png');
 }
@@ -148,4 +149,116 @@ input[type=range]::-webkit-slider-thumb {
 .nugget-10 input[type=range]::-webkit-slider-thumb {    
     background-image: url('/images/Chooks/nugget-10.png');
 }
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Karla', sans-serif;
+}
+
+.site-header {
+    background-color: #1d1d1d;
+    color: #fffaf0;
+    padding: 10px;
+}
+
+.site-header a {
+    color: inherit;
+}
+
+.site-logo {
+    text-decoration: none;
+}
+
+.hero-section {
+    background-color: #fbecc7;
+    background-image: url(./repeating-chicken.png);
+    background-size: 170px;
+    background-position: center;
+    padding: 60px 20px;
+}
+
+.hero-section__inner {
+    max-width: 400px;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.hero-section h1 {
+    margin: 0;
+}
+
+.hero-section p {
+    margin: 0;
+}
+
+.content {
+    max-width: 600px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.review-list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+}
+
+/* > means only an li that is a direct child of the review list will be affected */
+.review-list > li {
+    max-width: 48%;
+    margin: 0 0 20px 0;
+}
+
+.review {
+    display: block;
+}
+
+.review__title {
+    margin: 0;
+}
+
+.review__image {
+    display: block;
+    max-width: 100%;
+}
+
+.site-footer {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 40px 10px;
+    text-align: center;
+}
+
+@media (max-width: 500px) {
+
+    .hero-section {
+        padding: 20px;
+        background-size: 130px;
+    }
+    .review-list {
+        display: block;
+    }
+    .review-list > li {
+        max-width: 100%;
+    }
+}
+
+.autocomplete {
+    background-color: white;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+
+.autocomplete > div:hover {
+    background-color: coral;
+}
+
+
 

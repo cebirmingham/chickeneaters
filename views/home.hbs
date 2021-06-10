@@ -1,6 +1,12 @@
 <p>reviews</p>
-<ul>
+<ul class="review-list">
   {{#each reviews}}
-    <li><a href='/{{slug}}'>{{title}}</a></li>
+    <li>
+      <a class="review" href="http://localhost:3000/review/{{id}}">
+        <img class="review__image" src="/images/dogorchicken.png" />
+        <h3 class="review__title">{{title}}</h3>
+        <span class="review__overall-rating">5/10</span>
+      </a>
+    </li>
   {{/each}}
 </ul>

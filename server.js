@@ -1,25 +1,25 @@
 /* Todo
     - icons for delivery and drunk reviews
     - handle null values (i.e. if no sauces/drinks ordered. can comment on available selection
-    - put up on heroku
-    - actual reviews in db
 )*/
 
 const express = require('express');
 const logger = require('morgan');
 const dotenv = require('dotenv');
 const knex = require('knex');
-const axios = require('axios');
 const bodyParser = require('body-parser')
 const tempData = require("./temp-data/reviews.json");
 const expressHandlebars = require('express-handlebars');
-const { sendToNeo } = require('./api/sendToNeo');
-const { fetchFromNeo } = require('./api/fetchFromNeo');
-
 dotenv.config();
+const { sendToHasura } = require('./api/sendToHasura');
+const { fetchAllFromHasura } = require('./api/fetchAllFromHasura');
+const { fetchReviewsFromHasura } = require('./api/fetchReviewsFromHasura');
+const { fetchReviewFromHasura } = require('./api/fetchReviewFromHasura');
 
-// Temporary code to secure live website
-const lockEverythingDown = Boolean(process.env.LOCK_EVERYTHING_DOWN);
+
+
+// Temporary code to secure live code
+const lockEverythingDown = Boolean(process.env.LOCK_EVERYTHING_DOWN === 'true');
 
 const app = express();
 const database = knex({
@@ -39,7 +39,7 @@ app.use(logger('dev'));
 app.use(express.static(__dirname + '/static'));
 
 app.get('/', async (req, res) => {
-    const data = await fetchFromNeo()
+    const data = await fetchReviewsFromHasura()
     .catch(console.error);
 
     res.render('home', {
@@ -50,15 +50,13 @@ app.get('/', async (req, res) => {
     });
 });
 
-app.get('/:slug', (req, res, next) => {
-    const reviews = tempData.filter((review) => {
-       return req.params.slug === review.slug;
-    });
-    const review = reviews[0];
+app.get('/review/:id', async (req, res, next) => {
+    const review = await fetchReviewFromHasura(req.params.id);
+
     if (review) {
         res.render("review", {
-            title: review.title,
-            review: review,
+            title: review[0].title,
+            review: review[0],
             mainImage:"/images/reviews1.jpg"
         });
     }
@@ -74,10 +72,11 @@ app.get('/about', (req, res) => {
     });
 });
 
-if (!lockEverythingDown) {
+if (lockEverythingDown !== true) {
 
     app.get('/admin/addReview', async (req, res) => {
         const host = process.env.NODE_ENV === 'production' ? 'https://chickeneaters.co.uk' : 'http://localhost:3000';
+        const chickenShopList = await fetchAllFromHasura(req.body).catch(console.error);
         res.render('admin/addReview', {
             review: {
                 chickenPieceRating: 0,
@@ -86,25 +85,26 @@ if (!lockEverythingDown) {
                 sauceRating: 0,
                 drinkRating: 0,
                 overallRating: 0
-            }
+            },
+            chickenShopList,
         });
     });
 
-    app.post('/api/sendToNeo' , async (req, res) => {
-
-        await sendToNeo(req.body)
-            .catch(console.error);
-    })
-
-    app.get('/api/fetchFromNeo' , async (req, res) => {
-
-        const data = await fetchFromNeo()
+    app.post('/api/sendToHasura' , async (req, res) => {
+        const data = await sendToHasura(req.body)
             .catch(console.error);
         res.json({
-            data
+             data
         })
     })
 
+    app.get('/api/fetchAllFromHasura' , async (req, res) => {
+        const data = await fetchAllFromHasura(req.body)
+        .catch(console.error);
+    res.json({
+         data
+        })
+    })
 }
 
 app.listen(process.env.PORT || 3000, () => {
